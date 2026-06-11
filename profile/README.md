@@ -1,4 +1,5 @@
 <div align="center">
+
 # Veloria Tech
 
 **AI-first product studio · Bengaluru, Karnataka, India**
