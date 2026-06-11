@@ -24,8 +24,8 @@ export function VeloriaNavigation() {
             <Link to="/" className="flex-shrink-0 flex items-center" style={{ transform: 'none', transition: 'none' }}>
               <div className="w-10 h-10 rounded-lg flex items-center justify-center mr-3 shadow-lg bg-white/0 border border-[#3ecf8e]" style={{ transform: 'none', transition: 'none' }}>
                 <img
-                  src="/vite.svg"
-                  alt="Vite Logo"
+                  src="/logo.png"
+                  alt="Veloria Tech Logo"
                   className="w-8 h-8"
                   style={{ display: 'block' }}
                 />
