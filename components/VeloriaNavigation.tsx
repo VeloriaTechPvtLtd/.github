@@ -15,6 +15,9 @@ const navLinks = [
 const navLinkClass =
   "px-3 py-1.5 text-[0.875rem] font-medium tracking-snug text-muted-foreground hover:text-foreground transition-colors duration-200";
 
+const barClass =
+  "max-w-7xl mx-auto bg-background rounded-lg shadow-[rgba(1,1,32,0.1)_-10px_0px_75px_0px]";
+
 function MenuIcon() {
   return (
     <svg
@@ -56,12 +59,18 @@ function CloseIcon() {
   );
 }
 
-function NavLinks({ block = false }: { block?: boolean }) {
+function NavLinks({
+  block = false,
+  linkClass,
+}: {
+  block?: boolean;
+  linkClass: string;
+}) {
   return navLinks.map((item) => (
     <SectionLink
       key={item.label}
       sectionId={item.sectionId}
-      className={block ? `block py-2.5 ${navLinkClass}` : navLinkClass}
+      className={block ? `block py-2.5 ${linkClass}` : linkClass}
       onNavigate={
         block
           ? () => {
@@ -79,7 +88,7 @@ export function VeloriaNavigation() {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-[100] pt-4 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto bg-background rounded-lg shadow-[rgba(1,1,32,0.1)_-10px_0px_75px_0px]">
+        <div className={barClass}>
           <div className="flex items-center justify-between h-[3.75rem] px-4 sm:px-5">
             <Link href="/" className="flex items-center gap-2.5 group">
               <img
@@ -96,7 +105,7 @@ export function VeloriaNavigation() {
             </Link>
 
             <div className="hidden md:flex items-center gap-0.5">
-              <NavLinks />
+              <NavLinks linkClass={navLinkClass} />
             </div>
 
             <div className="hidden md:block">
@@ -122,7 +131,7 @@ export function VeloriaNavigation() {
               </summary>
               <div className="border-t border-border px-3 pb-3">
                 <div className="pt-2 space-y-0.5">
-                  <NavLinks block />
+                  <NavLinks block linkClass={navLinkClass} />
                   <div className="pt-2">
                     <SectionLink
                       sectionId={CONTACT_FORM_SECTION_ID}

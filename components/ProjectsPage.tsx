@@ -9,6 +9,7 @@ import {
   getProjectCardImageClass,
   getProjectImageSrc,
 } from '@/lib/utils/projectImage';
+import { PageHeaderBand } from './PageHeaderBand';
 
 const PROJECT_CATEGORIES = [
   { id: 'all', name: 'All Projects', icon: null },
@@ -77,11 +78,7 @@ export function ProjectsPage() {
     <div 
       className="min-h-screen bg-background text-foreground"
     >
-      {/* Header */}
-      <div 
-        className="-mt-nav-offset bg-gradient-to-r from-secondary to-background border-b border-border pt-nav-offset"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-6 sm:pt-5 sm:pb-8">
+      <PageHeaderBand>
           <div className="text-center mb-8">
             <h1 className="t-display mb-4">
               Our <span className="together-gradient-text">portfolio</span>
@@ -152,8 +149,7 @@ export function ProjectsPage() {
               </button>
             ))}
           </div>
-        </div>
-      </div>
+      </PageHeaderBand>
 
       {/* Projects Grid */}
       <div 

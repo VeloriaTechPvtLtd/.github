@@ -1,19 +1,21 @@
 "use client";
 
 import { motion } from 'framer-motion';
+import { PageHeaderBand } from './PageHeaderBand';
 
 export function PrivacyPolicyPage() {
   return (
     <div className="bg-background min-h-screen">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 page-top pb-12 sm:pb-16">
+      <PageHeaderBand width="4xl">
+        <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Privacy Policy</h1>
+        <p className="text-muted-foreground">Last updated: {new Date().toLocaleDateString()}</p>
+      </PageHeaderBand>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 sm:pb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">Privacy Policy</h1>
-          <p className="text-muted-foreground mb-8">Last updated: {new Date().toLocaleDateString()}</p>
-          
           <div className="prose prose max-w-none">
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-foreground mb-4">1. Information We Collect</h2>

@@ -86,9 +86,9 @@ export function CareersSection() {
 
   return (
     <section id="careers">
-      <div className="bg-brand-dark-blue text-white relative overflow-hidden -mt-nav-offset">
+      <div className="page-header-band-dark text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(202,174,245,0.12)_0%,transparent_60%)]" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[calc(var(--nav-offset)+2rem)] pb-14 sm:pt-[calc(var(--nav-offset)+2.5rem)] sm:pb-20 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-14 sm:pb-20 relative">
           <div className="max-w-2xl">
             <h2 className="text-display-lg text-white mb-4">Start your career remotely</h2>
             <p className="text-body-lg text-white/65 leading-relaxed tracking-snug">

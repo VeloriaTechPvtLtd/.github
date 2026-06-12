@@ -187,6 +187,14 @@
     @apply pt-8 sm:pt-10;
   }
 
+  .page-header-band {
+    @apply -mt-nav-offset bg-gradient-to-r from-secondary to-background border-b border-border pt-nav-offset;
+  }
+
+  .page-header-band-dark {
+    @apply -mt-nav-offset bg-brand-dark-blue pt-nav-offset;
+  }
+
   /* ——— Typography (Together.ai scale) ——— */
   .t-display {
     @apply text-display-xl text-foreground;

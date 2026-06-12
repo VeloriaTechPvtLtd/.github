@@ -25,6 +25,7 @@ import {
 } from "@/lib/data/blogsData";
 import { SectionLink } from "./SectionLink";
 import { CONTACT_FORM_SECTION_ID } from "@/lib/utils/scrollToSection";
+import { PageHeaderBand } from "./PageHeaderBand";
 
 interface BlogDetailProps {
   post: BlogPost;
@@ -91,8 +92,7 @@ export function BlogDetail({ post }: BlogDetailProps) {
 
   return (
     <article className="blog-detail-page bg-background text-foreground min-h-screen">
-      {/* Hero */}
-      <header className="page-top max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16">
+      <PageHeaderBand innerPadding="hero">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-6 xl:col-span-5">
               <span className="together-tag mb-5 block">{post.category}</span>
@@ -144,7 +144,7 @@ export function BlogDetail({ post }: BlogDetailProps) {
               </div>
             </div>
           </div>
-      </header>
+      </PageHeaderBand>
 
       {/* Key takeaways */}
       <section className="py-12 sm:py-16 together-section-alt border-y border-border">

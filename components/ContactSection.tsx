@@ -60,7 +60,7 @@ function buildWeb3FormsPayload(accessKey: string, values: FormValues) {
   };
 }
 
-export function ContactSection() {
+export function ContactSection({ standalonePage = false }: { standalonePage?: boolean }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -140,9 +140,17 @@ export function ContactSection() {
 
   return (
     <section className="bg-background">
-      <div className="bg-brand-dark-blue text-white relative overflow-hidden">
+      <div
+        className={`bg-brand-dark-blue text-white relative overflow-hidden${
+          standalonePage ? " -mt-nav-offset pt-nav-offset" : ""
+        }`}
+      >
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(202,174,245,0.12)_0%,transparent_60%)]" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 relative">
+        <div
+          className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative${
+            standalonePage ? " pt-8 sm:pt-10 pb-14 sm:pb-20" : " py-20 sm:py-24"
+          }`}
+        >
           <div className="max-w-2xl">
             <h2 className="text-display-lg text-white mb-4">Start building with Veloria Tech</h2>
             <p className="text-body-lg text-white/65 leading-relaxed mb-10 tracking-snug">

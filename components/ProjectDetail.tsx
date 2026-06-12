@@ -19,6 +19,7 @@ import {
   getProjectImageSrc,
   getScreenshotImageClass,
 } from '@/lib/utils/projectImage';
+import { PageHeaderBand } from './PageHeaderBand';
 
 interface ProjectDetailProps {
   project: Project;
@@ -180,9 +181,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
 
   return (
     <article className="bg-background text-foreground min-h-screen">
-      {/* Hero */}
-      <header className="-mt-nav-offset bg-gradient-to-r from-secondary to-background pb-12 sm:pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-nav-offset page-top">
+      <PageHeaderBand innerPadding="hero">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           <div className="lg:col-span-6 xl:col-span-5">
             <div className="flex flex-wrap items-center gap-3 mb-5">
@@ -264,8 +263,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               </div>
             ))}
           </dl>
-        </div>
-      </header>
+      </PageHeaderBand>
 
       {/* Screenshots */}
       {project.screenshots.length > 0 && (

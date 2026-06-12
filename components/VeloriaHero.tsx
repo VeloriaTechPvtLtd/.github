@@ -48,7 +48,7 @@ function HeroVisualLabel({
 
 export function VeloriaHero() {
   return (
-    <section className="hp-hero relative bg-background -mt-nav-offset">
+    <section className="hp-hero relative bg-gradient-to-r from-secondary to-background -mt-nav-offset">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div
           className="absolute -top-32 right-[-10%] w-[520px] h-[520px] bg-brand-purple/15 rounded-full blur-[100px] animate-pulse"

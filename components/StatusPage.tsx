@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Home, RefreshCw } from "lucide-react";
+import { PageHeaderBand } from "./PageHeaderBand";
 
 interface StatusAction {
   label: string;
@@ -26,13 +27,11 @@ export function StatusPage({
 }: StatusPageProps) {
   return (
     <div className="bg-background min-h-[calc(100vh-var(--nav-offset))] flex flex-col">
-      <header className="page-top pb-4 sm:pb-8 border-b border-border bg-secondary/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="t-label mb-3">{label}</p>
-          <h1 className="t-display mb-4 tracking-snug">{title}</h1>
-          <p className="t-section-desc max-w-2xl">{description}</p>
-        </div>
-      </header>
+      <PageHeaderBand>
+        <p className="t-label mb-3">{label}</p>
+        <h1 className="t-display mb-4 tracking-snug">{title}</h1>
+        <p className="t-section-desc max-w-2xl">{description}</p>
+      </PageHeaderBand>
 
       <div className="flex-1 flex items-center justify-center px-4 sm:px-6 py-16 sm:py-24">
         <div className="max-w-lg w-full text-center">

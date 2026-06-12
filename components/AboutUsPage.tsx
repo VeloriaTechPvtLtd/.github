@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { PageHeaderBand } from "./PageHeaderBand";
 
 const companyDetails = [
   { label: 'Legal Name', value: 'Veloria Tech (OPC) Private Limited' },
@@ -23,16 +24,17 @@ const companyDetails = [
 export function AboutUsPage() {
   return (
     <div className="legal-doc-page bg-background min-h-screen overflow-visible">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 page-top pb-12 sm:pb-16 overflow-visible">
+      <PageHeaderBand width="4xl">
+        <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">About Us</h1>
+        <p className="text-muted-foreground">Last updated: {new Date().toLocaleDateString()}</p>
+      </PageHeaderBand>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 sm:pb-16 overflow-visible">
         <motion.div
           className="overflow-visible"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">About Us</h1>
-          <p className="text-muted-foreground mb-8">Last updated: {new Date().toLocaleDateString()}</p>
-
           <div className="max-w-none overflow-visible">
             <section className="mb-8 overflow-visible">
               <h2 className="text-2xl font-bold text-foreground mb-4">Who We Are</h2>
