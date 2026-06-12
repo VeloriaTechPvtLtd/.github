@@ -172,7 +172,9 @@ footer *:hover {
 }
 
 .min-h-screen .trusted-marquee,
-.min-h-screen .trusted-marquee *:not(.rfm-marquee) {
+.min-h-screen
+  .trusted-marquee
+  *:not(.rfm-marquee):not(.trusted-marquee__track) {
   transform: revert !important;
   will-change: revert !important;
   backface-visibility: revert !important;
@@ -181,15 +183,20 @@ footer *:hover {
   transform-origin: revert !important;
 }
 
-.min-h-screen .trusted-marquee .rfm-marquee {
+.min-h-screen .trusted-marquee .rfm-marquee,
+.min-h-screen .trusted-marquee .trusted-marquee__track {
   animation-name: scroll !important;
-  animation-duration: var(--duration) !important;
+  animation-duration: var(--duration, 45s) !important;
   animation-timing-function: linear !important;
-  animation-delay: var(--delay) !important;
-  animation-iteration-count: var(--iteration-count) !important;
-  animation-direction: var(--direction) !important;
-  animation-play-state: var(--play) !important;
+  animation-delay: var(--delay, 0s) !important;
+  animation-iteration-count: var(--iteration-count, infinite) !important;
+  animation-direction: var(--direction, normal) !important;
+  animation-play-state: var(--play, running) !important;
   animation-fill-mode: none !important;
+}
+
+.min-h-screen .trusted-marquee .trusted-marquee__track {
+  animation-name: trustedMarquee !important;
 }
 
 .min-h-screen .trusted-marquee_item {

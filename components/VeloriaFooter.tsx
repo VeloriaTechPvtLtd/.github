@@ -39,7 +39,7 @@ export function VeloriaFooter() {
         { name: "Testimonials", sectionId: "testimonials" },
         { name: "Blogs", href: "/blogs" },
         { name: "Careers", href: "/careers" },
-        { name: "Contact Us", sectionId: "contact" },
+        { name: "Contact Us", sectionId: "contact-form" },
       ],
     },
   ];

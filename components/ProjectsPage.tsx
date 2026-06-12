@@ -10,6 +10,27 @@ import {
   getProjectImageSrc,
 } from '@/lib/utils/projectImage';
 
+const PROJECT_CATEGORIES = [
+  { id: 'all', name: 'All Projects', icon: null },
+  { id: 'mobile', name: 'Mobile Apps', icon: Smartphone },
+  { id: 'web', name: 'Web Apps', icon: Globe },
+  { id: 'ai', name: 'AI Solutions', icon: Bot },
+  { id: 'analytics', name: 'Analytics', icon: BarChart3 },
+  { id: 'ecommerce', name: 'E-commerce', icon: ShoppingCart },
+  { id: 'communication', name: 'Communication', icon: MessageSquare },
+] as const;
+
+const projectCategoryLabels = Object.fromEntries(
+  PROJECT_CATEGORIES.filter((category) => category.id !== 'all').map((category) => [
+    category.id,
+    category.name,
+  ])
+);
+
+function getProjectCategoryLabel(categoryId: string) {
+  return projectCategoryLabels[categoryId] ?? categoryId;
+}
+
 export function ProjectsPage() {
   const router = useRouter();
 
@@ -19,16 +40,6 @@ export function ProjectsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('recent');
-
-  const categories = [
-    { id: 'all', name: 'All Projects', icon: null },
-    { id: 'mobile', name: 'Mobile Apps', icon: Smartphone },
-    { id: 'web', name: 'Web Apps', icon: Globe },
-    { id: 'ai', name: 'AI Solutions', icon: Bot },
-    { id: 'analytics', name: 'Analytics', icon: BarChart3 },
-    { id: 'ecommerce', name: 'E-commerce', icon: ShoppingCart },
-    { id: 'communication', name: 'Communication', icon: MessageSquare }
-  ];
 
   const sortOptions = [
     { value: 'recent', label: 'Most Recent' },
@@ -123,7 +134,7 @@ export function ProjectsPage() {
           <div 
             className="flex flex-wrap justify-center gap-2 sm:gap-4"
           >
-            {categories.map((category) => (
+            {PROJECT_CATEGORIES.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
@@ -195,9 +206,9 @@ export function ProjectsPage() {
                   </div>
                 </div>
 
-                <div className="absolute bottom-4 left-4">
-                  <span className="together-tag bg-white/95 px-2.5 py-1 rounded-md backdrop-blur-sm">
-                    {project.category}
+                <div className="absolute bottom-4 left-4 overflow-visible">
+                  <span className="together-image-label">
+                    {getProjectCategoryLabel(project.category)}
                   </span>
                 </div>
               </div>

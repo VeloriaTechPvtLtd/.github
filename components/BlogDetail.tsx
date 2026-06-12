@@ -24,6 +24,7 @@ import {
   getRelatedPosts,
 } from "@/lib/data/blogsData";
 import { SectionLink } from "./SectionLink";
+import { CONTACT_FORM_SECTION_ID } from "@/lib/utils/scrollToSection";
 
 interface BlogDetailProps {
   post: BlogPost;
@@ -413,7 +414,7 @@ export function BlogDetail({ post }: BlogDetailProps) {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <SectionLink
-                sectionId="contact"
+                sectionId={CONTACT_FORM_SECTION_ID}
                 className="together-btn-primary inline-flex items-center px-6 py-3 text-body-sm"
               >
                 Get in touch

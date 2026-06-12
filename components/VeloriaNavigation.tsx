@@ -1,11 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { SectionLink } from "./SectionLink";
+import { CONTACT_FORM_SECTION_ID } from "@/lib/utils/scrollToSection";
 
 const navLinks = [
   { label: "Arenzo", sectionId: "arenzo" },
   { label: "Services", sectionId: "services" },
   { label: "Projects", sectionId: "projects" },
   { label: "Testimonials", sectionId: "testimonials" },
-  { label: "Contact", sectionId: "contact" },
+  { label: "Contact", sectionId: CONTACT_FORM_SECTION_ID },
 ] as const;
 
 const navLinkClass =
@@ -54,13 +58,20 @@ function CloseIcon() {
 
 function NavLinks({ block = false }: { block?: boolean }) {
   return navLinks.map((item) => (
-    <Link
+    <SectionLink
       key={item.label}
-      href={`/#${item.sectionId}`}
+      sectionId={item.sectionId}
       className={block ? `block py-2.5 ${navLinkClass}` : navLinkClass}
+      onNavigate={
+        block
+          ? () => {
+              document.getElementById("mobile-nav")?.removeAttribute("open");
+            }
+          : undefined
+      }
     >
       {item.label}
-    </Link>
+    </SectionLink>
   ));
 }
 
@@ -89,12 +100,12 @@ export function VeloriaNavigation() {
             </div>
 
             <div className="hidden md:block">
-              <Link
-                href="/#contact"
+              <SectionLink
+                sectionId={CONTACT_FORM_SECTION_ID}
                 className="together-btn-primary inline-flex items-center justify-center h-9 px-5 text-[0.875rem] rounded-lg border-0"
               >
                 Get Started
-              </Link>
+              </SectionLink>
             </div>
 
             <details id="mobile-nav" className="mobile-nav md:hidden">
@@ -113,12 +124,15 @@ export function VeloriaNavigation() {
                 <div className="pt-2 space-y-0.5">
                   <NavLinks block />
                   <div className="pt-2">
-                    <Link
-                      href="/#contact"
+                    <SectionLink
+                      sectionId={CONTACT_FORM_SECTION_ID}
                       className="together-btn-primary inline-flex items-center justify-center w-full rounded-lg border-0 h-10"
+                      onNavigate={() => {
+                        document.getElementById("mobile-nav")?.removeAttribute("open");
+                      }}
                     >
                       Get Started
-                    </Link>
+                    </SectionLink>
                   </div>
                 </div>
               </div>

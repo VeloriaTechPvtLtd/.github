@@ -2,6 +2,7 @@ import { ArrowRight, Calendar, Clock } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "./ui/badge";
 import { SectionLink } from "./SectionLink";
+import { CONTACT_FORM_SECTION_ID } from "@/lib/utils/scrollToSection";
 import { blogPosts, getBlogPostPath } from "@/lib/data/blogsData";
 
 interface BlogsSectionProps {
@@ -76,7 +77,7 @@ export function BlogsSection({ hideHeader = false }: BlogsSectionProps) {
             Want to discuss a topic or collaborate on a guest post?
           </p>
           <SectionLink
-            sectionId="contact"
+            sectionId={CONTACT_FORM_SECTION_ID}
             className="inline-flex items-center text-body-sm font-medium text-foreground hover:gap-2 gap-1 transition-all duration-300"
           >
             Get in touch

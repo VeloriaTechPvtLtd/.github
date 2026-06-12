@@ -139,12 +139,12 @@
 
   .container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl, .max-w-3xl, .max-w-2xl, .max-w-xl, .max-w-lg, .max-w-md, .max-w-sm {
     max-width: 100vw;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   section, div, main, aside, article {
     max-width: 100vw;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   section[id] {
@@ -302,6 +302,10 @@
   .together-tag {
     @apply text-label uppercase tracking-wide;
     color: var(--brand-orange-accessible);
+  }
+
+  .together-image-label {
+    @apply inline-block text-label uppercase tracking-wide text-brand-orange-accessible bg-white/95 px-2.5 py-1 rounded-md backdrop-blur-sm;
   }
 
   .together-input {
@@ -521,6 +525,16 @@
     width: 100%;
     overflow: hidden;
     overflow-y: visible;
+  }
+
+  .trusted-marquee .rfm-marquee-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .trusted-marquee .rfm-child {
+    display: flex;
+    align-items: center;
   }
 
   .trusted-marquee__track {

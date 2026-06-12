@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { ResourcePreloads } from "@/components/ResourcePreloads";
+import { HashScrollHandler } from "@/components/HashScrollHandler";
 import { VeloriaNavigation } from "@/components/VeloriaNavigation";
 import { VeloriaFooter } from "@/components/VeloriaFooter";
 import {
@@ -69,9 +70,10 @@ export default function RootLayout({
         <JsonLd data={organizationJsonLd()} />
         <JsonLd data={websiteJsonLd()} />
         <Script id="deferred-bootstrap" strategy="lazyOnload">
-          {`(function(){function loadSheet(href){if(document.querySelector('link[href="'+href+'"]'))return;var link=document.createElement("link");link.rel="stylesheet";link.href=href;document.head.appendChild(link)}function loadDeferred(){loadSheet("/fonts-deferred.css");loadSheet("/styles-deferred.css")}"requestIdleCallback"in window?requestIdleCallback(loadDeferred,{timeout:2e3}):setTimeout(loadDeferred,1);var o=76;function s(id){var el=document.getElementById(id);if(!el)return;var t=el.getBoundingClientRect().top+window.scrollY-o;window.scrollTo({top:Math.max(0,t),behavior:"smooth"})}function h(){if(location.pathname!=="/")return;var hash=location.hash.replace(/^#/,"");hash&&requestAnimationFrame(function(){s(hash)})}window.addEventListener("hashchange",h,{passive:!0});document.readyState==="loading"?document.addEventListener("DOMContentLoaded",h):h();document.addEventListener("click",function(e){var d=document.getElementById("mobile-nav");d&&d.open&&e.target.closest&&e.target.closest("#mobile-nav a")&&d.removeAttribute("open")},{passive:!0})})();`}
+          {`(function(){function loadSheet(href){if(document.querySelector('link[href="'+href+'"]'))return;var link=document.createElement("link");link.rel="stylesheet";link.href=href;document.head.appendChild(link)}function loadDeferred(){loadSheet("/fonts-deferred.css");loadSheet("/styles-deferred.css")}"requestIdleCallback"in window?requestIdleCallback(loadDeferred,{timeout:2e3}):setTimeout(loadDeferred,1);var o=76;function s(id){var el=document.getElementById(id);if(!el)return;var t=el.getBoundingClientRect().top+window.scrollY-o;window.scrollTo({top:Math.max(0,t),behavior:"smooth"})}function h(){if(location.pathname!=="/")return;var hash=location.hash.replace(/^#/,"");hash&&(hash=hash==="contact"?"contact-form":hash,requestAnimationFrame(function(){s(hash)}))}window.addEventListener("hashchange",h,{passive:!0});document.readyState==="loading"?document.addEventListener("DOMContentLoaded",h):h();document.addEventListener("click",function(e){var d=document.getElementById("mobile-nav");d&&d.open&&e.target.closest&&e.target.closest("#mobile-nav a")&&d.removeAttribute("open")},{passive:!0})})();`}
         </Script>
         <div className="min-h-screen text-foreground scroll-smooth overflow-x-hidden w-full bg-background">
+          <HashScrollHandler />
           <VeloriaNavigation />
           <main id="main-content">{children}</main>
           <VeloriaFooter />

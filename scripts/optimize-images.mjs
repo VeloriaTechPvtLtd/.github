@@ -1,7 +1,8 @@
 import sharp from "sharp";
-import { stat } from "node:fs/promises";
+import { readdir, stat } from "node:fs/promises";
+import path from "node:path";
 
-const jobs = [
+const staticJobs = [
   {
     input: "public/assets/hero-platform-visual.png",
     output: "public/assets/hero-platform-visual.webp",
@@ -28,7 +29,23 @@ const jobs = [
   },
 ];
 
-for (const job of jobs) {
+async function collectPngFiles(dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...(await collectPngFiles(fullPath)));
+    } else if (entry.name.endsWith(".png")) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
+
+async function runJob(job) {
   const source =
     job.input === job.output
       ? await sharp(job.input).toBuffer()
@@ -51,4 +68,18 @@ for (const job of jobs) {
   console.log(
     `${job.output}: ${(before.size / 1024).toFixed(0)}KB -> ${(after.size / 1024).toFixed(0)}KB`,
   );
+}
+
+for (const job of staticJobs) {
+  await runJob(job);
+}
+
+const iconPngs = await collectPngFiles("public/assets/icons");
+for (const input of iconPngs) {
+  await runJob({
+    input,
+    output: input.replace(/\.png$/, ".webp"),
+    resize: { width: 2048, height: 2048, fit: "inside", withoutEnlargement: true },
+    webp: { quality: 82 },
+  });
 }

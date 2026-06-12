@@ -25,10 +25,12 @@ export function SectionLink({
     onNavigate?.();
 
     if (pathname === "/") {
-      scrollToSection(sectionId);
       window.history.replaceState(null, "", `/#${sectionId}`);
-      // replaceState does not fire hashchange; nav active state listens for it
+      // replaceState does not fire hashchange; nav + lazy sections listen for it
       window.dispatchEvent(new HashChangeEvent("hashchange"));
+      requestAnimationFrame(() => {
+        scrollToSection(sectionId);
+      });
     } else {
       router.push(`/#${sectionId}`);
     }

@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { Mail, Phone, MapPin, Send, CheckCircle, ArrowRight, AlertCircle } from "lucide-react";
 import { getWeb3FormsAccessKey, submitToWeb3Forms } from "@/lib/utils/web3forms";
+import { scrollToSection, CONTACT_FORM_SECTION_ID } from "@/lib/utils/scrollToSection";
 
 type FormValues = {
   name: string;
@@ -115,7 +116,7 @@ export function ContactSection() {
 
   if (isSubmitted) {
     return (
-      <section className="bg-background home-scroll-section" id="contact">
+      <section className="bg-background">
         <div className="max-w-4xl mx-auto px-4 py-24 text-center together-fade-in">
           <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-8 h-8 text-white" strokeWidth={1.75} />
@@ -138,7 +139,7 @@ export function ContactSection() {
   }
 
   return (
-    <section className="bg-background home-scroll-section" id="contact">
+    <section className="bg-background">
       <div className="bg-brand-dark-blue text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(202,174,245,0.12)_0%,transparent_60%)]" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 relative">
@@ -147,18 +148,22 @@ export function ContactSection() {
             <p className="text-body-lg text-white/65 leading-relaxed mb-10 tracking-snug">
               From mobile apps to AI-powered platforms — ship production software with a team that delivers.
             </p>
-            <a
-              href="mailto:hr@veloriatech.com"
+            <button
+              type="button"
+              onClick={() => scrollToSection(CONTACT_FORM_SECTION_ID)}
               className="inline-flex items-center bg-white text-brand-dark-blue hover:bg-white/90 font-medium px-7 py-3 rounded-lg text-body-sm transition-all duration-300 tracking-snug hover:-translate-y-0.5 hover:shadow-lg"
             >
               Get started now
               <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
+            </button>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+      <div
+        id="contact-form"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 home-scroll-section"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
           <div>
             <h3 className="t-card-title mb-3">Contact us</h3>
@@ -183,7 +188,6 @@ export function ContactSection() {
           <div className="lg:col-span-2">
             <form
               ref={formRef}
-              id="contact-form"
               onSubmit={handleSubmit}
               noValidate
               className="together-card relative p-7 sm:p-9 space-y-5"

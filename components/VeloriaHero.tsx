@@ -1,7 +1,8 @@
-import Link from "next/link";
 import { type CSSProperties } from "react";
 import { ArrowRight } from "lucide-react";
+import { SectionLink } from "./SectionLink";
 import { TrustedByMarquee } from "./TrustedByMarquee";
+import { CONTACT_FORM_SECTION_ID } from "@/lib/utils/scrollToSection";
 
 const trustedBy = [
   "HealthTech",
@@ -74,19 +75,19 @@ export function VeloriaHero() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Link
-                  href="/#contact"
+                <SectionLink
+                  sectionId={CONTACT_FORM_SECTION_ID}
                   className={`${heroCtaClass} together-btn-primary px-8 h-12 text-[0.9375rem]`}
                 >
                   Start building
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-                <Link
-                  href="/#projects"
+                </SectionLink>
+                <SectionLink
+                  sectionId="projects"
                   className={`${heroCtaClass} together-btn-secondary px-8 h-12 text-[0.9375rem] border`}
                 >
                   View our work
-                </Link>
+                </SectionLink>
               </div>
             </div>
 

@@ -564,7 +564,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               applications.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/#contact" className="together-btn-primary inline-flex items-center px-6 py-3 text-body-sm">
+              <Link href="/#contact-form" className="together-btn-primary inline-flex items-center px-6 py-3 text-body-sm">
                 Start a project
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
