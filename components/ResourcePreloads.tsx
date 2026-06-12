@@ -24,13 +24,6 @@ export function ResourcePreloads() {
         type="font/woff2"
         crossOrigin="anonymous"
       />
-      <link
-        rel="preload"
-        href="/fonts/the-future/the-future-medium.woff2"
-        as="font"
-        type="font/woff2"
-        crossOrigin="anonymous"
-      />
     </>
   );
 }
