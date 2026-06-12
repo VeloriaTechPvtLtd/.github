@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Car, Bike, Armchair, Palette, Box, HardHat, Laptop, ArrowRight } from "lucide-react";
 
 export function ArenzoSection() {
@@ -47,11 +48,14 @@ export function ArenzoSection() {
           </div>
 
           <div className="relative overflow-visible">
-            <div className="rounded-2xl border border-border overflow-hidden shadow-card aspect-[4/3] bg-secondary">
-              <img
-                src="/images/arenzo.png"
+            <div className="rounded-2xl border border-border overflow-hidden shadow-card aspect-[4/3] bg-secondary relative">
+              <Image
+                src="/images/arenzo.webp"
                 alt="Arenzo marketplace"
-                className="block w-full h-full object-cover object-center"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                loading="lazy"
+                className="object-cover object-center"
               />
             </div>
             <div className="absolute -bottom-4 -right-4 bg-white border border-border rounded-xl px-5 py-3.5 shadow-card-hover">

@@ -1,125 +1,132 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Button } from "./ui/button";
-import { Menu, X } from "lucide-react";
-import { SectionLink } from "./SectionLink";
+
+const navLinks = [
+  { label: "Arenzo", sectionId: "arenzo" },
+  { label: "Services", sectionId: "services" },
+  { label: "Projects", sectionId: "projects" },
+  { label: "Testimonials", sectionId: "testimonials" },
+  { label: "Contact", sectionId: "contact" },
+] as const;
+
+const navLinkClass =
+  "px-3 py-1.5 text-[0.875rem] font-medium tracking-snug text-muted-foreground hover:text-foreground transition-colors duration-200";
+
+function MenuIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <line x1="4" x2="20" y1="12" y2="12" />
+      <line x1="4" x2="20" y1="6" y2="6" />
+      <line x1="4" x2="20" y1="18" y2="18" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  );
+}
+
+function NavLinks({ block = false }: { block?: boolean }) {
+  return navLinks.map((item) => (
+    <Link
+      key={item.label}
+      href={`/#${item.sectionId}`}
+      className={block ? `block py-2.5 ${navLinkClass}` : navLinkClass}
+    >
+      {item.label}
+    </Link>
+  ));
+}
 
 export function VeloriaNavigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const pathname = usePathname();
-  const [activeHash, setActiveHash] = useState("");
-
-  useEffect(() => {
-    const syncHash = () => setActiveHash(window.location.hash);
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    return () => window.removeEventListener("hashchange", syncHash);
-  }, [pathname]);
-
-  // Re-sync when mobile menu opens (hash may have changed via replaceState)
-  useEffect(() => {
-    if (isMenuOpen) {
-      setActiveHash(window.location.hash);
-    }
-  }, [isMenuOpen]);
-
-  const closeMenu = () => setIsMenuOpen(false);
-  const isSectionActive = (sectionId: string) =>
-    pathname === "/" && activeHash === `#${sectionId}`;
-  const navWrapperClass = "fixed top-0 left-0 right-0 z-[100] pt-4 px-4 sm:px-6";
-  const navShellClass =
-    "max-w-7xl mx-auto bg-background rounded-lg shadow-[rgba(1,1,32,0.1)_-10px_0px_75px_0px]";
-
-  const navLinks = [
-    { label: "Arenzo", sectionId: "arenzo" },
-    { label: "Services", sectionId: "services" },
-    { label: "Projects", sectionId: "projects" },
-    { label: "Testimonials", sectionId: "testimonials" },
-    { label: "Contact", sectionId: "contact" },
-  ];
-
   return (
     <>
-    <nav className={navWrapperClass} style={{ transform: 'none', transition: 'none' }}>
-      <div
-        className={navShellClass}
-        style={{ transform: 'none', transition: 'none' }}
-      >
-        <div className="flex items-center justify-between h-[3.75rem] px-4 sm:px-5" style={{ transform: 'none', transition: 'none' }}>
-          <Link href="/" className="flex items-center gap-2.5 group" style={{ transform: 'none', transition: 'none' }}>
-            <img src="/logo.png" alt="Veloria Tech" className="w-8 h-8" />
-            <span className="text-[0.9375rem] font-medium text-foreground tracking-snug leading-none">
-              Veloria Tech
-            </span>
-          </Link>
+      <nav className="fixed top-0 left-0 right-0 z-[100] pt-4 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto bg-background rounded-lg shadow-[rgba(1,1,32,0.1)_-10px_0px_75px_0px]">
+          <div className="flex items-center justify-between h-[3.75rem] px-4 sm:px-5">
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <img
+                src="/logo.webp"
+                alt=""
+                width={32}
+                height={32}
+                className="w-8 h-8"
+                decoding="async"
+              />
+              <span className="text-[0.9375rem] font-medium text-foreground tracking-snug leading-none">
+                Veloria Tech
+              </span>
+            </Link>
 
-          <div className="hidden md:flex items-center gap-0.5" style={{ transform: 'none', transition: 'none' }}>
-            {navLinks.map((item) => (
-              <SectionLink
-                key={item.label}
-                sectionId={item.sectionId}
-                className={`px-3 py-1.5 text-[0.875rem] font-medium tracking-snug transition-colors duration-200 ${
-                  isSectionActive(item.sectionId)
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {item.label}
-              </SectionLink>
-            ))}
-          </div>
-
-          <div className="hidden md:block" style={{ transform: 'none', transition: 'none' }}>
-            <SectionLink sectionId="contact">
-              <Button className="together-btn-primary h-9 px-5 text-[0.875rem] rounded-lg border-0" style={{ transform: 'none', transition: 'none' }}>
-                Get Started
-              </Button>
-            </SectionLink>
-          </div>
-
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-muted-foreground p-2 rounded-lg hover:bg-secondary transition-colors"
-            style={{ transform: 'none', transition: 'none' }}
-          >
-            {isMenuOpen ? <X className="h-5 w-5" strokeWidth={1.75} /> : <Menu className="h-5 w-5" strokeWidth={1.75} />}
-          </button>
-        </div>
-
-        {isMenuOpen && (
-          <div className="md:hidden border-t border-border px-3 pb-3" style={{ transform: 'none', transition: 'none' }}>
-            <div className="pt-2 space-y-0.5">
-              {navLinks.map((item) => (
-                <SectionLink
-                  key={item.label}
-                  sectionId={item.sectionId}
-                  onNavigate={closeMenu}
-                  className={`block px-3 py-2.5 text-[0.875rem] font-medium tracking-snug transition-colors duration-200 ${
-                    isSectionActive(item.sectionId)
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {item.label}
-                </SectionLink>
-              ))}
-              <div className="pt-2">
-                <SectionLink sectionId="contact" onNavigate={closeMenu}>
-                  <Button className="w-full together-btn-primary rounded-lg border-0" style={{ transform: 'none', transition: 'none' }}>
-                    Get Started
-                  </Button>
-                </SectionLink>
-              </div>
+            <div className="hidden md:flex items-center gap-0.5">
+              <NavLinks />
             </div>
+
+            <div className="hidden md:block">
+              <Link
+                href="/#contact"
+                className="together-btn-primary inline-flex items-center justify-center h-9 px-5 text-[0.875rem] rounded-lg border-0"
+              >
+                Get Started
+              </Link>
+            </div>
+
+            <details id="mobile-nav" className="mobile-nav md:hidden">
+              <summary
+                className="text-muted-foreground p-2 rounded-lg hover:bg-secondary transition-colors cursor-pointer"
+                aria-label="Open menu"
+              >
+                <span className="nav-icon-menu">
+                  <MenuIcon />
+                </span>
+                <span className="nav-icon-close">
+                  <CloseIcon />
+                </span>
+              </summary>
+              <div className="border-t border-border px-3 pb-3">
+                <div className="pt-2 space-y-0.5">
+                  <NavLinks block />
+                  <div className="pt-2">
+                    <Link
+                      href="/#contact"
+                      className="together-btn-primary inline-flex items-center justify-center w-full rounded-lg border-0 h-10"
+                    >
+                      Get Started
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </details>
           </div>
-        )}
-      </div>
-    </nav>
-    {/* Spacer — matches fixed nav height (pt-4 + h-[3.75rem]) so content isn't hidden underneath */}
-    <div aria-hidden="true" className="h-nav-offset shrink-0" />
+        </div>
+      </nav>
+      <div aria-hidden="true" className="h-nav-offset shrink-0" />
     </>
   );
 }

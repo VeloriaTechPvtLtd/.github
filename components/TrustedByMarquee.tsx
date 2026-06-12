@@ -1,28 +1,21 @@
-"use client";
-
-import Marquee from "react-fast-marquee";
-
 interface TrustedByMarqueeProps {
   items: string[];
-  /** Scroll speed in pixels per second. */
-  speed?: number;
 }
 
-export function TrustedByMarquee({ items, speed = 50 }: TrustedByMarqueeProps) {
+export function TrustedByMarquee({ items }: TrustedByMarqueeProps) {
+  const loop = [...items, ...items];
+
   return (
     <div className="hp-hero_bottom-inner trusted-marquee">
-      <Marquee
-        speed={speed}
-        gradient={false}
-        pauseOnHover={false}
-        className="trusted-marquee__scroller"
-      >
-        {items.map((name) => (
-          <span key={name} className="trusted-marquee_item">
-            {name}
-          </span>
-        ))}
-      </Marquee>
+      <div className="trusted-marquee__viewport" aria-hidden="true">
+        <div className="trusted-marquee__track">
+          {loop.map((name, index) => (
+            <span key={`${name}-${index}`} className="trusted-marquee_item">
+              {name}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

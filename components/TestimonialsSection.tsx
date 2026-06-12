@@ -1,8 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-
-interface TestimonialsSectionProps {
-  onViewAllProjects: () => void;
-}
 
 const customerStories = [
   {
@@ -35,7 +33,7 @@ const customerStories = [
   },
 ];
 
-export function TestimonialsSection({ onViewAllProjects }: TestimonialsSectionProps) {
+export function TestimonialsSection() {
   return (
     <section className="py-20 sm:py-24 bg-secondary home-scroll-section" id="testimonials">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,10 +52,14 @@ export function TestimonialsSection({ onViewAllProjects }: TestimonialsSectionPr
               className="together-card overflow-hidden group"
             >
               <div className="relative h-44 sm:h-52 overflow-hidden bg-secondary">
-                <img
+                <Image
                   src={story.image}
-                  alt={story.company}
-                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-smooth"
+                  alt=""
+                  aria-hidden="true"
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  loading="lazy"
+                  className="object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-smooth"
                 />
                 <div className="absolute top-4 left-4 flex flex-wrap gap-1.5">
                   {story.tags.map((tag) => (
@@ -90,14 +92,10 @@ export function TestimonialsSection({ onViewAllProjects }: TestimonialsSectionPr
                     </p>
                     <p className="t-body-sm mt-1">{story.metricLabel}</p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={onViewAllProjects}
-                    className="t-link text-body-sm"
-                  >
+                  <Link href="/projects" className="t-link text-body-sm">
                     Read story
                     <ArrowRight className="t-link-arrow h-4 w-4" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </article>
@@ -105,10 +103,10 @@ export function TestimonialsSection({ onViewAllProjects }: TestimonialsSectionPr
         </div>
 
         <div className="mt-10 text-center">
-          <button type="button" onClick={onViewAllProjects} className="t-link">
+          <Link href="/projects" className="t-link">
             View all stories
             <ArrowRight className="t-link-arrow h-4 w-4" />
-          </button>
+          </Link>
         </div>
       </div>
     </section>

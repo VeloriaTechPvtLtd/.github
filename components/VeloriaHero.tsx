@@ -1,8 +1,7 @@
+import Link from "next/link";
 import { type CSSProperties } from "react";
-import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
 import { TrustedByMarquee } from "./TrustedByMarquee";
-import { scrollToSection } from "@/lib/utils/scrollToSection";
 
 const trustedBy = [
   "HealthTech",
@@ -18,10 +17,15 @@ const trustedBy = [
 ];
 
 const heroLabels = [
-  { text: "Mobile apps", top: "18%", left: "8%" },
-  { text: "Web & AI", top: "42%", right: "6%" },
-  { text: "Production ready", bottom: "22%", left: "28%" },
+  { text: "Mobile apps", top: "12%", left: "6%" },
+  { text: "Web platforms", top: "10%", right: "4%" },
+  { text: "AI & ML", top: "48%", right: "2%" },
+  { text: "Cloud & DevOps", bottom: "18%", left: "42%" },
+  { text: "Integrations", bottom: "20%", left: "6%" },
 ];
+
+const heroCtaClass =
+  "inline-flex items-center justify-center whitespace-nowrap rounded-lg font-medium font-sans tracking-snug transition-all duration-300 ease-smooth focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
 function HeroVisualLabel({
   text,
@@ -42,9 +46,6 @@ function HeroVisualLabel({
 }
 
 export function VeloriaHero() {
-  const scrollToContact = () => scrollToSection("contact");
-  const scrollToProjects = () => scrollToSection("projects");
-
   return (
     <section className="hp-hero relative bg-background -mt-nav-offset">
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -73,32 +74,40 @@ export function VeloriaHero() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Button
-                  size="lg"
-                  className="together-btn-primary px-8 h-12 text-[0.9375rem]"
-                  onClick={scrollToContact}
+                <Link
+                  href="/#contact"
+                  className={`${heroCtaClass} together-btn-primary px-8 h-12 text-[0.9375rem]`}
                 >
                   Start building
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="together-btn-secondary px-8 h-12 text-[0.9375rem] border"
-                  onClick={scrollToProjects}
+                </Link>
+                <Link
+                  href="/#projects"
+                  className={`${heroCtaClass} together-btn-secondary px-8 h-12 text-[0.9375rem] border`}
                 >
                   View our work
-                </Button>
+                </Link>
               </div>
             </div>
 
             <div className="hp-hero_visual">
-              <img
-                src="/assets/hero-platform-visual.png"
-                alt="Abstract visualization of Veloria's interconnected full-stack platform"
-                className="hp-hero_visual-img"
-                loading="eager"
-              />
+              <picture>
+                <source
+                  media="(max-width: 1023px)"
+                  srcSet="/assets/hero-platform-visual-mobile.webp"
+                  type="image/webp"
+                />
+                <img
+                  src="/assets/hero-platform-visual.webp"
+                  alt="Platform hub connecting mobile, web, AI, cloud, and integrations"
+                  width={1024}
+                  height={683}
+                  fetchPriority="high"
+                  loading="eager"
+                  decoding="async"
+                  className="hp-hero_visual-img"
+                />
+              </picture>
               {heroLabels.map((label) => (
                 <HeroVisualLabel
                   key={label.text}

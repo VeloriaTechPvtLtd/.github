@@ -1,9 +1,7 @@
 import { ArrowRight } from "lucide-react";
-import { finalProjectsData } from "@/lib/data/projectsData";
+import { HOME_PROJECT_COUNT } from "@/lib/data/homeFeaturedProjects";
 
 export function PlatformStatsSection() {
-  const projectCount = finalProjectsData.length;
-
   const stats = [
     {
       title: "Faster delivery",
@@ -14,7 +12,7 @@ export function PlatformStatsSection() {
     },
     {
       title: "Production quality",
-      value: `${projectCount}+`,
+      value: `${HOME_PROJECT_COUNT}+`,
       description: "apps shipped to App Store & Play Store.",
       link: "#projects",
       linkLabel: "See portfolio",

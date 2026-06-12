@@ -1,6 +1,9 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { blogPosts, getBlogPostPath } from "@/lib/data/blogsData";
+import {
+  featuredBlogPosts,
+  getFeaturedBlogPostPath,
+} from "@/lib/data/featuredBlogPosts";
 
 const processSteps = [
   { step: "01", title: "Discovery", description: "Understanding your requirements, users, and business goals." },
@@ -10,7 +13,7 @@ const processSteps = [
   { step: "05", title: "Launch", description: "Deployment, app store submission, and ongoing support." },
 ];
 
-const featuredPosts = blogPosts.slice(0, 3);
+const featuredPosts = featuredBlogPosts;
 
 export function WhyChooseUsSection() {
   return (
@@ -31,7 +34,7 @@ export function WhyChooseUsSection() {
                 key={step.step}
                 className="together-card p-6 group hover:border-brand-purple/30"
               >
-                <span className="t-mono text-body-xs font-medium text-brand-orange mb-4 block">
+                <span className="t-mono text-body-xs font-medium text-brand-orange-accessible mb-4 block">
                   {step.step}
                 </span>
                 <h3 className="text-body-sm font-medium text-foreground mb-2 tracking-snug">
@@ -66,7 +69,7 @@ export function WhyChooseUsSection() {
             {featuredPosts.map((item) => (
               <Link
                 key={item.id}
-                href={getBlogPostPath(item)}
+                href={getFeaturedBlogPostPath(item.slug)}
                 className="together-card p-6 group cursor-pointer block no-underline"
               >
                 <span className="together-tag mb-4 block">{item.category}</span>

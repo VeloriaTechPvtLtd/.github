@@ -11,7 +11,7 @@ export function getProjectById(id: number): Project | undefined {
   return finalProjectsData.find((project) => project.id === id);
 }
 
-export function getProjectPath(project: Project): string {
+export function getProjectPath(project: Pick<Project, "slug">): string {
   return `/projects/${project.slug}`;
 }
 

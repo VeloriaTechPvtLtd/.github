@@ -1,6 +1,6 @@
 import type { BlogPost } from "@/lib/data/blogs";
 import { getProjectPath, type Project } from "@/lib/data/projects";
-import { getSiteUrl, SITE_NAME } from "./site";
+import { getSiteUrl, SITE_DESCRIPTION, SITE_NAME } from "./site";
 
 export function JsonLd({ data }: { data: Record<string, unknown> }) {
   return (
@@ -17,8 +17,9 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: SITE_NAME,
+    description: SITE_DESCRIPTION,
     url: siteUrl,
-    logo: `${siteUrl}/logo.png`,
+    logo: `${siteUrl}/logo.webp`,
     sameAs: [
       "https://www.linkedin.com/company/veloria-tech-pvt-ltd",
       "https://github.com/veloriatech",
@@ -32,7 +33,16 @@ export function websiteJsonLd() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: SITE_NAME,
+    description: SITE_DESCRIPTION,
     url: siteUrl,
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/logo.webp`,
+      },
+    },
   };
 }
 
@@ -56,7 +66,7 @@ export function articleJsonLd(post: BlogPost) {
       name: SITE_NAME,
       logo: {
         "@type": "ImageObject",
-        url: `${siteUrl}/logo.png`,
+        url: `${siteUrl}/logo.webp`,
       },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },

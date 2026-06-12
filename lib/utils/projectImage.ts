@@ -7,6 +7,9 @@ const HERO_IMAGE_CLASS = `${HERO_ASPECT_CLASS} w-full object-cover object-center
 const SCREENSHOT_IMAGE_CLASS = `${SCREENSHOT_ASPECT_CLASS} w-full object-contain object-center bg-[#0d1117] block`;
 
 export function getProjectImageSrc(image: string): string {
+  if (image.endsWith(".png")) {
+    return image.replace(/\.png$/, ".webp");
+  }
   return image;
 }
 

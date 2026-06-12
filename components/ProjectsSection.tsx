@@ -1,22 +1,15 @@
+import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { finalProjectsData, Project } from "@/lib/data/projectsData";
+import { homeFeaturedProjects } from "@/lib/data/homeFeaturedProjects";
+import { getProjectPath } from "@/lib/data/projects";
 import {
   getProjectCardAspectClass,
   getProjectCardImageClass,
   getProjectImageSrc,
 } from "@/lib/utils/projectImage";
 
-interface ProjectsSectionProps {
-  onViewAllProjects: () => void;
-  onProjectSelect: (project: Project) => void;
-}
-
-export function ProjectsSection({
-  onViewAllProjects,
-  onProjectSelect,
-}: ProjectsSectionProps) {
-  const featured = finalProjectsData.slice(0, 3);
-
+export function ProjectsSection() {
   return (
     <section className="py-20 sm:py-24 bg-background home-scroll-section" id="projects">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -30,29 +23,32 @@ export function ProjectsSection({
               of mobile and web products.
             </p>
           </div>
-          <button onClick={onViewAllProjects} className="t-link shrink-0">
+          <Link href="/projects" className="t-link shrink-0">
             View all stories
             <ArrowRight className="t-link-arrow h-4 w-4" />
-          </button>
+          </Link>
         </div>
 
         <div className="space-y-5">
-          {featured.map((project, index) => (
-            <article
+          {homeFeaturedProjects.map((project, index) => (
+            <Link
               key={project.id}
-              onClick={() => onProjectSelect(project)}
-              className="group grid grid-cols-1 lg:grid-cols-12 gap-0 together-card cursor-pointer hover:-translate-y-0.5 transition-transform duration-300"
+              href={getProjectPath(project)}
+              className="group grid grid-cols-1 lg:grid-cols-12 gap-0 together-card cursor-pointer hover:-translate-y-0.5 transition-transform duration-300 no-underline"
             >
               <div
                 className={`lg:col-span-5 relative overflow-hidden bg-secondary ${getProjectCardAspectClass()} lg:aspect-auto lg:min-h-[260px] ${
                   index % 2 === 1 ? "lg:order-2" : ""
                 }`}
               >
-                <img
+                <Image
                   src={getProjectImageSrc(project.image)}
-                  alt={project.title}
-                  className={`${getProjectCardImageClass()} group-hover:scale-[1.03] transition-transform duration-700 ease-smooth`}
+                  alt=""
+                  aria-hidden="true"
+                  fill
+                  sizes="(min-width: 1024px) 42vw, 100vw"
                   loading="lazy"
+                  className={`${getProjectCardImageClass()} group-hover:scale-[1.03] transition-transform duration-700 ease-smooth`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
@@ -106,7 +102,7 @@ export function ProjectsSection({
                   </span>
                 </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>

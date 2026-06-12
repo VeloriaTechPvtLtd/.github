@@ -1,0 +1,40 @@
+/* Non-critical weights — loaded after first paint. */
+@font-face {
+  font-family: "The Future Mono";
+  src: url("/fonts/the-future-mono/the-future-mono-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "The Future Mono";
+  src: url("/fonts/the-future-mono/the-future-mono-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "The Future";
+  src: url("/fonts/the-future/the-future-light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "The Future";
+  src: url("/fonts/the-future/the-future-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "The Future Mono";
+  src: url("/fonts/the-future-mono/the-future-mono-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

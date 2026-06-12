@@ -8,4 +8,4 @@ export function getSiteUrl(): string {
   return "https://veloriatech.com";
 }
 
-export const DEFAULT_OG_IMAGE = "/assets/hero-platform-visual.png";
+export const DEFAULT_OG_IMAGE = "/assets/hero-platform-visual.webp";

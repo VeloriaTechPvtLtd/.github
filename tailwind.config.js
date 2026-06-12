@@ -36,6 +36,7 @@ export default {
       colors: {
         "brand-purple": "#caaef5",
         "brand-orange": "#fc4c02",
+        "brand-orange-accessible": "var(--brand-orange-accessible)",
         "brand-magenta": "#ef2cc1",
         "brand-dark-blue": "#010120",
         background: "var(--background)",

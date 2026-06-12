@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
+import { ResourcePreloads } from "@/components/ResourcePreloads";
 import { VeloriaNavigation } from "@/components/VeloriaNavigation";
 import { VeloriaFooter } from "@/components/VeloriaFooter";
-import { ScrollToTop } from "@/components/ScrollToTop";
 import {
   JsonLd,
   organizationJsonLd,
@@ -36,6 +37,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: `${SITE_NAME} - Software Solutions`,
     description: SITE_DESCRIPTION,
+    url: siteUrl,
     images: [{ url: DEFAULT_OG_IMAGE, alt: SITE_NAME }],
   },
   twitter: {
@@ -44,8 +46,12 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [DEFAULT_OG_IMAGE],
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
-    icon: "/logo.png",
+    icon: "/logo.webp",
   },
 };
 
@@ -57,28 +63,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
-          rel="preload"
-          href="/fonts/the-future/the-future-regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/the-future/the-future-medium.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <JsonLd data={organizationJsonLd()} />
-        <JsonLd data={websiteJsonLd()} />
+        <ResourcePreloads />
       </head>
       <body>
+        <JsonLd data={organizationJsonLd()} />
+        <JsonLd data={websiteJsonLd()} />
+        <Script id="deferred-bootstrap" strategy="lazyOnload">
+          {`(function(){function f(){var h="/fonts-deferred.css";if(document.querySelector('link[href="'+h+'"]'))return;var l=document.createElement("link");l.rel="stylesheet";l.href=h;document.head.appendChild(l)}"requestIdleCallback"in window?requestIdleCallback(f,{timeout:2e3}):setTimeout(f,1);var o=76;function s(id){var el=document.getElementById(id);if(!el)return;var t=el.getBoundingClientRect().top+window.scrollY-o;window.scrollTo({top:Math.max(0,t),behavior:"smooth"})}function h(){if(location.pathname!=="/")return;var hash=location.hash.replace(/^#/,"");hash&&requestAnimationFrame(function(){s(hash)})}window.addEventListener("hashchange",h,{passive:!0});document.readyState==="loading"?document.addEventListener("DOMContentLoaded",h):h();document.addEventListener("click",function(e){var d=document.getElementById("mobile-nav");d&&d.open&&e.target.closest&&e.target.closest("#mobile-nav a")&&d.removeAttribute("open")},{passive:!0})})();`}
+        </Script>
         <div className="min-h-screen text-foreground scroll-smooth overflow-x-hidden w-full bg-background">
-          <ScrollToTop />
           <VeloriaNavigation />
-          {children}
+          <main id="main-content">{children}</main>
           <VeloriaFooter />
         </div>
       </body>

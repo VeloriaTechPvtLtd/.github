@@ -1,4 +1,19 @@
-@import "./fonts.css";
+/* Critical weights for above-the-fold content (hero, nav, stats). */
+@font-face {
+  font-family: "The Future";
+  src: url("/fonts/the-future/the-future-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "The Future";
+  src: url("/fonts/the-future/the-future-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
@@ -36,6 +51,7 @@
   --ring: #010120;
   --brand-purple: #caaef5;
   --brand-orange: #fc4c02;
+  --brand-orange-accessible: #c2410c;
   --brand-magenta: #ef2cc1;
   --brand-dark-blue: #010120;
   --chart-1: #caaef5;
@@ -126,6 +142,7 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --color-brand-purple: var(--brand-purple);
   --color-brand-orange: var(--brand-orange);
+  --color-brand-orange-accessible: var(--brand-orange-accessible);
   --color-brand-magenta: var(--brand-magenta);
   --color-brand-dark-blue: var(--brand-dark-blue);
 }
@@ -196,6 +213,10 @@
 
   section.home-scroll-section {
     scroll-margin-top: 4.75rem !important;
+  }
+
+  section[id] {
+    scroll-margin-top: var(--nav-offset) !important;
   }
 
   * {
@@ -490,6 +511,35 @@
 }
 
 @layer components {
+  .mobile-nav summary {
+    list-style: none;
+  }
+
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav .nav-icon-close {
+    display: none;
+  }
+
+  .mobile-nav[open] .nav-icon-menu {
+    display: none;
+  }
+
+  .mobile-nav[open] .nav-icon-close {
+    display: block;
+  }
+
+  .below-fold-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
+
+  .section-stream-placeholder {
+    min-height: 600px;
+  }
+
   /* ——— Page layout (nav spacer handles clearance; page-top adds modest breathing room) ——— */
   .page-top {
     @apply pt-8 sm:pt-10;
@@ -651,7 +701,8 @@
   }
 
   .together-tag {
-    @apply text-label uppercase text-brand-orange tracking-wide;
+    @apply text-label uppercase tracking-wide;
+    color: var(--brand-orange-accessible);
   }
 
   .together-input {
@@ -659,7 +710,7 @@
   }
 
   .together-input::placeholder {
-    color: rgba(0, 0, 0, 0.45);
+    color: rgba(0, 0, 0, 0.5);
   }
 
   .together-input:focus {
@@ -773,7 +824,7 @@
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(0, 0, 0, 0.7);
+    color: rgba(0, 0, 0, 0.75);
     white-space: nowrap;
   }
 
@@ -834,8 +885,7 @@
     letter-spacing: 0.005em;
     line-height: 1.4;
     text-transform: uppercase;
-    color: var(--foreground);
-    opacity: 0.7;
+    color: rgba(0, 0, 0, 0.75);
     white-space: nowrap;
   }
 
@@ -868,37 +918,27 @@
     mask-repeat: no-repeat;
   }
 
-  .trusted-marquee__scroller {
+  .trusted-marquee__viewport {
     width: 100%;
+    overflow: hidden;
     overflow-y: visible;
   }
 
-  .trusted-marquee .rfm-marquee-container,
-  .trusted-marquee .rfm-marquee,
-  .trusted-marquee .rfm-initial-child-container,
-  .trusted-marquee .rfm-child {
-    max-width: none !important;
-    overflow: visible !important;
-  }
-
-  .trusted-marquee .rfm-marquee {
-    min-width: auto !important;
-    width: max-content !important;
-    flex-shrink: 0;
-  }
-
-  .trusted-marquee .rfm-initial-child-container {
-    width: max-content;
-    flex-shrink: 0;
-  }
-
-  .trusted-marquee .rfm-child {
+  .trusted-marquee__track {
     display: flex;
     align-items: center;
-    flex: 0 0 auto;
-    flex-shrink: 0;
-    font-size: clamp(1.125rem, 2.5vw, 1.75rem);
-    padding-right: 3.375em;
+    width: max-content;
+    animation: trustedMarquee 45s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes trustedMarquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   .trusted-marquee_item {
@@ -908,14 +948,28 @@
     font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1;
-    color: #000;
+    color: rgba(0, 0, 0, 0.55);
     white-space: nowrap;
-    opacity: 0.4;
-    transition: opacity 0.3s ease;
+    padding-right: 3.375em;
+    transition: color 0.3s ease;
   }
 
   .trusted-marquee_item:hover {
-    opacity: 0.55;
+    color: rgba(0, 0, 0, 0.72);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trusted-marquee__track {
+      animation: none;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+      gap: 1rem 2rem;
+    }
+
+    .trusted-marquee_item {
+      padding-right: 0;
+    }
   }
 
   .together-fade-in {
