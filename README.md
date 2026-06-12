@@ -16,8 +16,8 @@ Whether you are a startup validating a new concept or an established company mod
 
 **At a glance**
 
-- 50+ projects delivered
-- 50+ happy clients
+- 8 production apps in portfolio
+- 8 happy clients
 - Global reach
 - 100% client satisfaction focus
 
@@ -86,11 +86,11 @@ We help innovative companies ship software that matters. Explore our portfolio, 
 
 | | |
 |---|---|
-| **Email** | [admin@veloriatech.com](mailto:admin@veloriatech.com) |
+| **Email** | [hr@veloriatech.com](mailto:hr@veloriatech.com) |
 | **Phone** | [+91 63615 62262](tel:+916361562262) |
 | **Location** | Bengaluru, India |
-| **Legal** | [legal@veloriatech.com](mailto:legal@veloriatech.com) |
-| **Privacy** | [privacy@veloriatech.com](mailto:privacy@veloriatech.com) |
+| **Legal** | [support@veloriatech.com](mailto:support@veloriatech.com) |
+| **Privacy** | [support@veloriatech.com](mailto:support@veloriatech.com) |
 
 **Connect with us**
 
@@ -101,11 +101,55 @@ We help innovative companies ship software that matters. Explore our portfolio, 
 
 ---
 
+## Development
+
+Stack: **Next.js 15** (App Router), React 18, TypeScript, Tailwind CSS.
+
+```bash
+npm install
+cp .env.example .env.local   # set Web3Forms key + site URL
+npm run dev                    # http://localhost:3000
+npm run build                  # static generation for 100+ blog/project pages
+```
+
+### Environment variables
+
+| Variable | Purpose |
+|----------|---------|
+| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Contact form submissions via [Web3Forms](https://web3forms.com) |
+| `NEXT_PUBLIC_SITE_URL` | Canonical URLs, sitemap, and Open Graph (e.g. `https://veloriatech.com`) |
+
+---
+
+## Deployment (Vercel)
+
+1. Push this repo to GitHub and [import the project in Vercel](https://vercel.com/new).
+2. Framework preset: **Next.js** (auto-detected).
+3. Add environment variables in Vercel → Settings → Environment Variables:
+   - `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`
+   - `NEXT_PUBLIC_SITE_URL`
+4. Deploy. Vercel pre-renders all blog and project pages at build time for SEO.
+5. Add your custom domain in Vercel and update DNS (replace Firebase Hosting records).
+6. After DNS propagates, submit `https://yourdomain.com/sitemap.xml` in Google Search Console.
+
+The contact form uses Web3Forms to deliver submissions to `hr@veloriatech.com`.
+
+---
+
+## SEO
+
+- Per-page `<title>`, meta description, Open Graph, and Twitter cards
+- `/sitemap.xml` and `/robots.txt` generated at build time
+- JSON-LD structured data (`Organization`, `Article`, `BreadcrumbList`, `SoftwareApplication`)
+- 100+ blog posts and 8 project pages statically generated (SSG)
+
+---
+
 ## Repository
 
 This is the official source for the Veloria Tech company website. It is maintained by the Veloria Tech team for internal development and deployment of our public-facing presence.
 
-For business inquiries, partnerships, or project discussions, contact us at [admin@veloriatech.com](mailto:admin@veloriatech.com).
+For business inquiries, partnerships, or project discussions, contact us at [hr@veloriatech.com](mailto:hr@veloriatech.com).
 
 ---
 
