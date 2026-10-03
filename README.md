@@ -118,6 +118,15 @@ npm run build                  # static generation for 100+ blog/project pages
 |----------|---------|
 | `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Contact form submissions via [Web3Forms](https://web3forms.com) |
 | `NEXT_PUBLIC_SITE_URL` | Canonical URLs, sitemap, and Open Graph (e.g. `https://veloriatech.com`) |
+| `META_APP_SECRET` | Server-side Meta App Secret used to verify signed deauthorization and data deletion requests |
+
+### Meta app callback endpoints
+
+- `https://veloriatech.com/meta/oauth/callback` — Redirect URI validation endpoint. A real authorization code is rejected until a WhatsApp signup client and secure connection store are implemented.
+- `https://veloriatech.com/meta/deauthorize` — Verifies Meta's `signed_request` using `META_APP_SECRET` and acknowledges deauthorization. This website currently stores no Meta account data.
+- `https://veloriatech.com/meta/data-deletion` — Verifies Meta's `signed_request` and returns a confirmation URL and code. Deletion completes immediately because this website currently stores no Meta user data.
+
+Set `META_APP_SECRET` in the production hosting environment before enabling the deauthorization and data deletion callbacks. Keep it server-side; never expose it through a `NEXT_PUBLIC_` variable. If the WhatsApp integration begins storing account or user data, connect these callbacks to that store and delete or revoke matching records before reporting completion.
 
 ---
 
@@ -128,6 +137,7 @@ npm run build                  # static generation for 100+ blog/project pages
 3. Add environment variables in Vercel → Settings → Environment Variables:
    - `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`
    - `NEXT_PUBLIC_SITE_URL`
+   - `META_APP_SECRET` (required for Meta deauthorization and data deletion requests)
 4. Deploy. Vercel pre-renders all blog and project pages at build time for SEO.
 5. Add your custom domain in Vercel and update DNS (replace Firebase Hosting records).
 6. After DNS propagates, submit `https://yourdomain.com/sitemap.xml` in Google Search Console.
